@@ -15,7 +15,6 @@ public class ClassDemo {
         Foo foo = new Foo();
         //通过Class的反射加载类的对象，这属于动态加载类的对象，这种方法主要用于程序运行的时候，在需要某一个类的时候再加载
         //因此在编译的时候不会出现静态加载的那种情况
-        //TODO
         Class class1 = Foo.class;
         Class class2 = foo.getClass();
         Class class3 = null;
