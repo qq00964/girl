@@ -15,7 +15,6 @@ public class ClassDemo {
         Foo foo = new Foo();
         //通过Class的反射加载类的对象，这属于动态加载类的对象，这种方法主要用于程序运行的时候，在需要某一个类的时候再加载
         //因此在编译的时候不会出现静态加载的那种情况
-        //TODO
         Class class1 = Foo.class;
         Class class2 = foo.getClass();
         Class class3 = null;
@@ -25,8 +24,8 @@ public class ClassDemo {
             e.printStackTrace();
         }
 
-        System.out.println("class1 == class3:"+(class1 == class3));
-        System.out.println("class2 == class3:"+(class2 == class3));
+        System.out.println("class1 == class3:" + (class1 == class3));
+        System.out.println("class2 == class3:" + (class2 == class3));
         // 可以通过类的类类型来获得类的实例对象，不再需要new，但要进行强制转换
         try {
             //一定要注意class3对象获取时调用的类名，强转时就是转换为该类的类型
