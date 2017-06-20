@@ -24,8 +24,8 @@ public class ClassDemo {
             e.printStackTrace();
         }
 
-        System.out.println("class1 == class3:"+(class1 == class3));
-        System.out.println("class2 == class3:"+(class2 == class3));
+        System.out.println("class1 == class3:" + (class1 == class3));
+        System.out.println("class2 == class3:" + (class2 == class3));
         // 可以通过类的类类型来获得类的实例对象，不再需要new，但要进行强制转换
         try {
             //一定要注意class3对象获取时调用的类名，强转时就是转换为该类的类型
