@@ -1,0 +1,161 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	text-decoration: none;
+}
+
+body {
+	font-size: 32px;
+}
+
+.fl {
+	float: left;
+}
+
+.fr {
+	float: right;
+}
+
+.clr {
+	clear: both;
+	zoom: 1;
+}
+
+.header {
+	width: 700px;
+	height: 50px;
+	text-align: center;
+	line-height: 50px;
+	font-size: 32px;
+	color: rgb(53, 193, 195);
+	margin: 20px auto 0 auto;
+}
+
+.return {
+	display: inline-block;
+	width: 50px;
+	font-size: 32px;
+	color: rgb(53, 193, 195);
+}
+
+.bg-img {
+	width: 100%;
+	height: 20px;
+	margin-top: 30px;
+	background: url(/front/mobile/images/bg_img.png) no-repeat center;
+}
+
+.userInfor>div {
+	width: 650px;
+	height: 100px;
+	line-height: 100px;
+	margin: 0 auto;
+	border-bottom: 1px solid #F1E6CA;
+}
+
+.userInfor div:last-child {
+	border: none;
+}
+
+.userInfor div span {
+	font-size: 32px;
+}
+
+.userInfor div input {
+	height: 80px;
+	font-size: 32px;
+	border: none;
+	outline: none;
+	text-align: right;
+	margin: 15px 20px 0 0;
+}
+
+.userInfor .Sex-box {
+	width: 220px;
+	height: 100px;
+	line-height: 100px;
+	padding-right: 30px;
+}
+
+.userInfor .Sex-box span {
+	display: inline-block;
+	width: 30px;
+	height: 100px;
+	line-height: 100px;
+	margin-left: 15px;
+}
+
+.userInfor .Sex-box input {
+	display: inline-block;
+	width: 30px;
+	height: 100px;
+	line-height: 100px;
+	color: rgb(53, 193, 195);
+	margin-left: 15px;
+	margin-top: 0;
+	font-size: 48px;
+}
+
+.userDiv {
+	position: relative;
+}
+
+.Validform_checktip {
+	top: 80px;
+}
+
+.Validform_checktip.Validform_right {
+	top: 45px;
+	right: -26px;
+}
+
+.age-inp {
+	background: #fff;
+	color: rgba(0, 0, 0, .25);
+}
+
+.userAddress>div {
+	height: 200px;
+}
+
+.userAddress .add-inp {
+	width: 100%;
+	height: 200px;
+	font-size: 32px;
+	margin: 0;
+	border: 1px solid #999;
+}
+
+.userAddress p {
+	color: #f00;
+	height: 40px;
+	margin: 0 auto;
+	font-size: 19px;
+	line-height: 0;
+	margin-top: 35px;
+}
+
+.empty {
+	height: 250px;
+}
+
+.foot {
+	position: relative;
+	height: 240px;
+	text-align: center;
+}
+
+.foot .schedulerEdit_button {
+	background: rgb(219, 56, 56);
+	font-size: 32px;
+	color: #fff;
+	height: 80px;
+	outline: none;
+	padding: 0 30px;
+	border: none;
+	border-radius: 80px;
+	margin-top: 20px;
+}

@@ -1,0 +1,64 @@
+# ------------------关于系统的配置
+spring:
+
+  profiles:
+    active: dev
+
+  thymeleaf:
+     #开发时关闭缓存,不然没法看到实时页面
+     cache: false
+     # 前缀
+     prefix: classpath:/templates/
+     #后缀
+     suffix: .html
+     encoding: UTF-8
+     #内容类型
+     content-type: text/html
+     # 请求页面的样式类型
+     mode: LEGACYHTML5
+
+# 设置数据源
+  datasource:
+    url: jdbc:mysql://localhost:3306/dbgirl
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 148702
+
+# JPA配置
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+# ------------------ 关于test初始化参数及取值的配置
+
+#key不能按照上面的格式书写
+name: shonlee
+
+com.shonlee.name: shonlee
+
+com.shonlee.title: hello world
+
+com.shonlee.work: ${com.shonlee.name}正在努力写${com.shonlee.title}
+
+# 随机字符串
+com.shonlee.value: ${random.value}
+# 随机int
+com.shonlee.number: ${random.int}
+# 随机long
+com.shonlee.bignumber: ${random.long}
+# 10以内的随机数
+com.shonlee.test1: ${random.int(10)}
+# 10-20的随机数(包前不包后)
+com.shonlee.test2: ${random.int[10,20]}
+
+# ------------------ 关于对email的测试配置
+
+spring.mail.host: smtp.163.com
+spring.mail.username: xiao_7061@163.com
+# 邮箱关于第三方登录的授权码
+spring.mail.password: li70687061
+spring.mail.properties.mail.smtp.auth: true
+spring.mail.properties.mail.smtp.starttls.enable: true
+spring.mail.properties.mail.smtp.starttls.required: true
+

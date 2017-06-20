@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Hello World</title>
+    <link th:href="@{/css/popup.css}">
+    <script type="text/javascript" th:src="@{/js/jquery-1.10.2.min.js}"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        $(function () {
+            alert("test");
+            popup("popup.test");
+        })
+        /*]]>*/
+    </script>
+</head>
+<body>
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~微信测试用户的基本信息 begin~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+<table>
+    <tr>
+        <th>是否订阅</th>
+        <th>OPENID</th>
+        <th>昵称</th>
+        <th>性别</th>
+        <th>城市</th>
+        <th>国家</th>
+        <th>省份</th>
+        <th>语言</th>
+        <th>头像</th>
+        <th>关注时间</th>
+        <th>绑定后显示</th>
+        <th>粉丝备注</th>
+        <th>用户所在的分组ID</th>
+    </tr>
+    <tr th:each="weChatUserBaseMessage : ${weChatUserBaseMessages}">
+        <td th:text="${weChatUserBaseMessage.subscribe==0?"没有关注"?"已关注"}">Onions</td>
+        <td th:text="${weChatUserBaseMessage.openid}">Onions</td>
+        <td th:text="${weChatUserBaseMessage.nickname}">Onions</td>
+        <td th:text="${weChatUserBaseMessage.sex==1?"男性":"女性"}">Onions</td>
+        <td th:text="${weChatUserBaseMessage.city}">Onions</td>
+        <td th:text="${weChatUserBaseMessage.country}">Onions</td>
+        <td th:text="${weChatUserBaseMessage.province}">Onions</td>
+        <td th:text="${weChatUserBaseMessage.language}">Onions</td>
+        <td th:text="${weChatUserBaseMessage.headimgurl}">Onions</td>
+        <td th:text="${weChatUserBaseMessage.subscribe_time}">Onions</td>
+        <td th:text="${weChatUserBaseMessage.unionid}">Onions</td>
+        <td th:text="${weChatUserBaseMessage.remark}">Onions</td>
+        <td th:text="${weChatUserBaseMessage.groupid}">Onions</td>
+    </tr>
+</table>
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~微信测试用户的基本信息 end~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~各种Thymeleaf表达式 begin~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+<br>
+变量表达式(获取后台model传入的参数)：${...} <br/>
+<p th:text="${hello}">Welcome to our store!</p><br/><br/>
+
+选择性/星号表达式：*{...} <br/>
+
+消息表达式(可以获取配置文件的数据)：#{...}<br/>
+<p th:text="#{name}">Welcome to our <b>fantastic</b> grocery store!</p><br/><br/>
+
+链接表达式：@{...} <br/>
+<link rel="stylesheet" th:href="@{/css/popup.css}"/>
+<br/>
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 各种Thymeleaf表达式 end ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+<br/><br>
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 各种OGNL表达式 begin ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+<br>
+#ctx：上下文对象。<br>
+#vars: 上下文变量。<br>
+#locale：上下文区域设置。<br>
+<span th:text="${#locale.country}">US</span><br><br>
+<!--<p>
+    Today is: <span th:text="${#calendars.format(today,'dd MMMM yyyy')}">13 May 2011</span>
+</p>-->
+
+#request：（仅在Web上下文中）HttpServletRequest对象。<br>
+#response：（仅在Web上下文中）HttpServletResponse对象。<br>
+#session：（仅在Web上下文中）HttpSession对象。<br>
+#servletContext：（仅在Web上下文中）ServletContext对象。<br>
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 各种OGNL表达式 end ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+<br>
+<1>javascript附加代码<br/>
+语法：/*[+ +]*/<br/>
+/*[+<br/>
+var msg = 'This is a working application';<br/>
++]*/<br/><br/><br/>
+
+<2>javascript移除代码<br/>
+语法：/*[- */ /* -]*/<br/>
+/*[- */<br/>
+var msg = 'This is a non-working template';<br/>
+/* -]*/<br/><br/><br/>
+
+模板缓存：<br/>
+1、指定特定的缓存：<br/>
+templateResolver.setCacheable(false);<br/>
+templateResolver.getCacheablePatternSpec().addPattern("/users/*");<br/><br/>
+2、清除缓存：<br/>
+templateEngine.clearTemplateCache();<br/>
+templateEngine.clearTemplateCacheFor("/users/userList");<br/><br/><br/>
+
+引入其他页面popup.html
+<div th:insert="~{popup :: popup}"></div>
+
+
+<h1 th:inline="text">Hello Thymeleaf</h1>
+默认的资源文件路径： <img th:src="@{/images/index.jpg}" alt="我的图片_默认的资源文件路径"><br>
+自定义的资源文件路径：<img th:src="@{/about/index.jpg}" alt="我的图片_自定义的资源文件路径"><br>
+</body>
+</html>

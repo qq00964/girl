@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>编辑信息</title>
+    <meta name="viewport" content="width=750px,user-scalable=no">
+    <link rel="stylesheet" th:href="@{/css/popup.css}"/>
+    <link rel="stylesheet" th:href="@{/css/schedulerEdit.css}"/>
+    <link rel="stylesheet" th:href="@{/css/jqtransform_edit.css}"/>
+    <link rel="stylesheet" th:href="@{/css/zeroModal.css}"/>
+
+<!--    <link rel="stylesheet" href="/css/popup.css" th:href="@{/css/popup.css}"/>
+    <link rel="stylesheet" href="/css/schedulerEdit.css" th:href="@{/css/schedulerEdit.css} />
+    <link rel="stylesheet" href="/css/jqtransform_edit.css" th:href="@{/css/jqtransform_edit.css}"/>
+    <link rel="stylesheet" href="/css/zeroModal.css" th:href="@{/css/zeroModal.css}"/>-->
+
+    <script type="text/javascript" src="/js/jquery-1.10.2.min.js" th:src="@{/js/jquery-1.10.2.min.js}"></script>
+    <script type="text/javascript" src="/js/zeroModal.js" th:src="@{/js/zeroModal.js}"></script>
+
+</head>
+<body>
+<div class="header">
+    <span class="return fl" onclick="window.history.back();">&lt;</span>
+    <c:choose>
+        <c:when test="${empty patientInfo}">
+            添加预约人员信息
+        </c:when>
+        <c:otherwise>
+            修改预约人员信息
+        </c:otherwise>
+    </c:choose>
+</div>
+<div class="bg-img"></div>
+<form
+<c:if test="${empty hospitalId}">action="/patient/${type}/schedulerSave.html"</c:if>
+<c:if test="${not empty hospitalId}">action="/order/${type}/patientSave.html"</c:if>
+method="post" id="edit_form">
+<!-- 创建订单前用户填写的订单信息 -->
+<input type="hidden" name="_csrf" value="${requestScope[" org.springframework.security.web.csrf.CsrfToken"].token}"/>
+<input type="hidden" name="hospitalId" value="${hospitalId}">
+<input type="hidden" name="orderTime" value="${orderTime}">
+<input type="hidden" name="duration" value="${duration}">
+<input type="hidden" name="departmentId" value="${departmentId}">
+<input type="hidden" name="doctorId" value="${doctorId}">
+<input type="hidden" name="type" value="${type}">
+
+<div class="userInfor">
+    <input type="hidden" name="id" value="${patientInfo.id}">
+    <div class="userName userDiv">
+        <span class="fl">预约人</span>
+        <input type="text" class="fr" value="${patientInfo.name }" name="name" datatype="*"
+               nullmsg="请输入姓名"/>
+        <div class="Validform_checktip"></div>
+    </div>
+    <div class="userTel userDiv">
+        <span class="fl">电话</span>
+        <input type="text" class="fr" value="${patientInfo.mobile}" name="mobile" datatype="m"
+               nullmsg="请输入手机号" errormsg="请输入正确的手机号"/>
+        <div class="Validform_checktip"></div>
+    </div>
+    <div class="userSex">
+        <span class="fl">性别</span>
+        <div class="Sex-box fr">
+            <div class="fl">
+                <span class="fl">男</span>
+                <input type="radio" checked="checked" value="1" class="fl" name="gender"/>
+            </div>
+            <div class="fr">
+                <span class="fl">女</span>
+                <input type="radio" value="0"
+                <c:if test="${patientInfo.gender==0}">checked="checked"</c:if>
+                class="" name="gender" />
+            </div>
+
+        </div>
+        <div class="clr"></div>
+    </div>
+    <div class="userNum userDiv">
+        <span class="fl">身份证</span>
+        <input type="text" class="fr" id="idCard" value="${patientInfo.idCard}" name="idCard"
+               datatype="idcard" nullmsg="请输入身份证号" errormsg="请输入正确的身份证号" oninput="idcard()"/>
+        <div class="Validform_checktip"></div>
+        <p id="demo"></p>
+    </div>
+    <div class="userAge" id="div_birthday">
+        <!-- 不用传入出生年月，在后台截取idCard为生日，页面联动处理 -->
+        <span class="fl">出生年月</span>
+        <input type="text" class="fr age-inp" id="input_birthday" name="birthday" readonly="readonly"
+               value="${patientInfo.birthday}"/>
+    </div>
+    <div class="userAddress userDiv">
+        <span class="fl">个人地址</span>
+        <br/>
+        <div>
+            <textarea class="add-inp" name="address" datatype="*" nullmsg="请输入地址">${patientInfo.address}</textarea>
+            <div class="Validform_checktip Vali-address"></div>
+        </div>
+        <p>以上所有信息均为医院挂号所需，所有信息均保密，不会用于预约外的用途</p>
+    </div>
+</div>
+<div class="empty"></div>
+<div class="bg-img"></div>
+<div class="foot">
+    <input type="submit" value="提交并存为预约人" class="schedulerEdit_button">
+</div>
+</form>
+<jsp:include page="/front/mobile/popup.jsp"></jsp:include>
+<script type="text/javascript" th:src="@{/js/jquery-1.10.2.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/jquery.jqtransform-min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/Validform_v5.3.2_min.js}"></script>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    $(function () {
+        if ("${Message}" && "${Message}" != "") {
+            popup("${Message}");
+        }
+    });
+    $(function () {
+        //就这一行代码！;
+        $("#edit_form")
+            .Validform(
+                {
+                    tiptype: function (msg, o, cssctl) {
+                        if (!o.obj.is("form")) {
+                            var objtip = o.obj.parent().find(".Validform_checktip");
+                            cssctl(objtip, o.type);
+                            objtip.text(msg);
+                        }
+                    },
+                    showAllError: true,
+                    usePlugin: {
+                        jqtransform: {
+                            //会在当前表单下查找这些元素;
+                            selector: "select,:checkbox,:radio"
+                        }
+                    },
+                    datatype: {//传入自定义datatype类型【方式二】;
+                        "idcard": function (gets, obj, curform, datatype) {
+                            //该方法由佚名网友提供;
+
+                            var Wi = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8,
+                                4, 2, 1];// 加权因子;
+                            var ValideCode = [1, 0, 10, 9, 8, 7, 6, 5, 4, 3, 2];// 身份证验证位值，10代表X;
+
+                            if (gets.length == 15) {
+                                return isValidityBrithBy15IdCard(gets);
+                            } else if (gets.length == 18) {
+                                var a_idCard = gets.split("");// 得到身份证数组
+                                if (isValidityBrithBy18IdCard(gets)
+                                    && isTrueValidateCodeBy18IdCard(a_idCard)) {
+                                    return true;
+                                }
+                                return false;
+                            }
+                            return false;
+
+                            function isTrueValidateCodeBy18IdCard(a_idCard) {
+                                var sum = 0; // 声明加权求和变量
+                                if (a_idCard[17].toLowerCase() == 'x') {
+                                    a_idCard[17] = 10;// 将最后位为x的验证码替换为10方便后续操作
+                                }
+                                for (var i = 0; i < 17; i++) {
+                                    sum += Wi[i] * a_idCard[i];// 加权求和
+                                }
+                                valCodePosition = sum % 11;// 得到验证码所位置
+                                if (a_idCard[17] == ValideCode[valCodePosition]) {
+                                    return true;
+                                }
+                                return false;
+                            }
+
+                            function isValidityBrithBy18IdCard(idCard18) {
+                                var year = idCard18.substring(6, 10);
+                                var month = idCard18.substring(10, 12);
+                                var day = idCard18.substring(12, 14);
+                                var temp_date = new Date(year, parseFloat(month) - 1,
+                                    parseFloat(day));
+                                // 这里用getFullYear()获取年份，避免千年虫问题
+                                if (temp_date.getFullYear() != parseFloat(year)
+                                    || temp_date.getMonth() != parseFloat(month) - 1
+                                    || temp_date.getDate() != parseFloat(day)) {
+                                    return false;
+                                }
+                                return true;
+                            }
+
+                            function isValidityBrithBy15IdCard(idCard15) {
+                                var year = idCard15.substring(6, 8);
+                                var month = idCard15.substring(8, 10);
+                                var day = idCard15.substring(10, 12);
+                                var temp_date = new Date(year, parseFloat(month) - 1,
+                                    parseFloat(day));
+                                // 对于老身份证中的你年龄则不需考虑千年虫问题而使用getYear()方法
+                                if (temp_date.getYear() != parseFloat(year)
+                                    || temp_date.getMonth() != parseFloat(month) - 1
+                                    || temp_date.getDate() != parseFloat(day)) {
+                                    return false;
+                                }
+                                return true;
+                            }
+                        }
+                    },
+                });
+    });
+    /*]]>*/
+</script>
+</body>
+</html>
