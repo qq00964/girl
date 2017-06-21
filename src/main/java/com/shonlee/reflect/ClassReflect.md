@@ -39,4 +39,22 @@
    **`class1`、`class2`、`class3`官网表示为`Foo`类的`ClassType`（类类型）**
   
     
-  1.2 
+  1.2 Class.forName("类的全名称")
+  
+  不仅表示了类的类类型，还代表了动态加载类
+    
+  1.3 基本数据类型
+  
+  只要在类中有的关键字都有Class对象，如：
+  int String void double.......
+  
+  1.4 Class类的基本API操作
+    参考ReflectUsing.java 
+  
+  2、通过Class，Method来认识泛型的本质
+  
+  
+  
+  
+  
+  

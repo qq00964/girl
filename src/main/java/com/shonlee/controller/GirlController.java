@@ -30,6 +30,7 @@ public class GirlController {
     @Autowired
     private GirlRepostoryJpa girlRepostory;
 
+
     /**
      * 使用构建器注入 girlService
      */

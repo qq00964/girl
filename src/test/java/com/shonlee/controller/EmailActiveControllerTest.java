@@ -20,6 +20,7 @@ import static org.junit.Assert.*;
 @SpringBootTest
 @AutoConfigureMockMvc
 public class EmailActiveControllerTest {
+
     @Autowired
     private MockMvc mockMvc;
     @Test

@@ -30,7 +30,12 @@ public class ClassDemo {
         try {
             //一定要注意class3对象获取时调用的类名，强转时就是转换为该类的类型
             Foo foo1 = (Foo) class3.newInstance();
-            System.out.println("通过反射调用的：" + foo1.getaa());
+            System.out.println("通过反射而来的foo1调用的：" + foo1.getaa());
+            System.out.println("通过反射而来的foo1.hashCode()：" + foo1.hashCode());
+            System.out.println("通过new出来的foo调用的：" + foo.getaa());
+            System.out.println("通过new出来的foo.hashCode()：" + foo.hashCode());
+            System.out.println("foo和foo1的hashCode是否相等：" + (foo.hashCode() == foo1.hashCode()));
+            System.out.println("foo和foo1是否相等：" + (foo == foo1));
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
