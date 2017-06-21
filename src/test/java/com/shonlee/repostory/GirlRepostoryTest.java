@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
 public class GirlRepostoryTest {
     @Test
     public void findByAge() throws Exception {
+
     }
 
 }

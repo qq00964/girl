@@ -21,6 +21,18 @@ public interface UserMapperMybatis {
     User findByName(@Param("name") String name);
 
     /**
+     * 通过@Provider的注解方式查询所有
+     */
+    @SelectProvider(type=SqlProvider.class,method="findByIdProvider")
+    User findByIdProvider(@Param("id") Long id);
+
+    /**
+     * 通过@Provider的注解方式插入一条信息
+     */
+    @InsertProvider(type=SqlProvider.class,method="insertUserProvider")
+    int insertUserProvider(@Param("name")String name ,@Param("age") Integer age,@Param("height") Double height);
+
+    /**
      * 通过普通的方式插入一条信息
      */
     @Insert("INSERT INTO user(name, age) VALUES(#{name}, #{age})")
