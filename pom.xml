@@ -11,6 +11,7 @@
     <name>girl</name>
     <description>Demo project for Spring Boot</description>
 
+    <!-- 继承父包,此包会添加依赖,spring用到的核心包-->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -26,6 +27,8 @@
     </properties>
 
     <dependencies>
+
+        <!-- spring-boot的web启动的jar包 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -125,6 +128,25 @@
             <artifactId>nekohtml</artifactId>
             <version>1.9.22</version>
         </dependency>
+
+        <!--&lt;!&ndash;配置jsp jstl的支持&ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>javax.servlet</groupId>-->
+            <!--<artifactId>jstl</artifactId>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>javax.servlet</groupId>-->
+            <!--<artifactId>javax.servlet-api</artifactId>-->
+        <!--</dependency>-->
+
+        <!--对jsp的支持-->
+        <!--当parent版本是1.4.0以上：properties中配置jsp前缀和后缀的时候一定要带上mvc;详见yml配置文件-->
+        <!--当parent版本是1.1.3以下：properties中配置jsp前缀和后缀的时候一定   不要  带上mvc-->
+        <!--<dependency>-->
+            <!--<groupId>org.apache.tomcat.embed</groupId>-->
+            <!--<artifactId>tomcat-embed-jasper</artifactId>-->
+        <!--</dependency>-->
 
     </dependencies>
 

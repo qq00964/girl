@@ -30,6 +30,12 @@ spring:
       ddl-auto: update
     show-sql: true
 
+##关于jsp的配置
+#  mvc:
+#    view:
+#      prefix: /WEB-INF/jsp/
+#      suffix: .jsp
+
 # ------------------ 关于test初始化参数及取值的配置
 
 #key不能按照上面的格式书写
