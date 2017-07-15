@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<!--xmlns属性：在文档中定义一个或多个可供选择的命名空间-->
+<!--类似于 URL，浏览器会将此URL用于该属性所在元素内的所有内容。-->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>JsFileTest(js+thymeleaf+bootstrap)</title>
+    <!--通过CDN服务引入bootstrap参考链接：http://v3.bootcss.com/getting-started/#download-->
+    <!--通过本地bootstrap文件引入-->
+    <link rel="stylesheet" th:href="@{/bootstrap-3.3.7-dist/css/bootstrap.min.css}"
+          href="/bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
+    <script type="text/javascript" th:src="@{/js/jquery-3.2.1.min.js}" src="/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/md5.js}" src="/js/md5.js"></script>
+    <script type="text/javascript" th:src="@{/bootstrap-3.3.7-dist/js/bootstrap.min.js}"
+            src="/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+    <!--文件上传-->
+    <script type="text/javascript">
+        $(function () {
+            var fileInput = document.getElementById('test-image-file');
+            var info = document.getElementById('test-file-info');
+            var preview = document.getElementById('test-image-preview');
+            // 监听change事件:
+            fileInput.addEventListener('change', function () {
+                // 清除背景图片:
+                preview.style.backgroundImage = '';
+                // 检查文件是否选择:
+                if (!fileInput.value) {
+                    info.innerHTML = '没有选择文件';
+                    return;
+                }
+                // 获取File引用:
+                var file = fileInput.files[0];
+                // 获取File信息:
+                info.innerHTML = '文件: ' + file.name + '<br>' +
+                    '大小: ' + file.size + '<br>' +
+                    '修改: ' + file.lastModifiedDate;
+                if (file.type !== 'image/jpeg' && file.type !== 'image/png' && file.type !== 'image/gif') {
+                    alert('不是有效的图片文件!');
+                    return;
+                }
+                // 读取文件:
+                var reader = new FileReader();
+                // 当文件读取完成后，自动调用此函数:
+                reader.onload = function (e) {
+                    var data = e.target.result; // 'data:image/jpeg;base64,/9j/4AAQSk...(base64编码)...'
+                    preview.style.backgroundImage = 'url(' + data + ')';
+                };
+                // 以DataURL的形式读取文件:
+                reader.readAsDataURL(file);
+            });
+        })
+    </script>
+</head>
+<body>
+<h2 align="center">文件上传预处理（bootstrap）</h2>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <!--当一个表单包含<input type="file">时，表单的enctype必须指定为multipart/form-data，method必须指定为post，-->
+            <!--浏览器才能正确编码并以multipart/form-data格式发送表单的数据。-->
+            <form role="form" enctype="multipart/form-data" method="post">
+                <div class="form-group">
+                    <label for="test-image-file">File input</label>
+                    <input type="file" id="test-image-file"/>
+                    <p class="help-block">
+                        Example block-level help text here.
+                    </p>
+                    <div id="test-file-info" style="border: solid 1px red;height: 70px;">
+
+                    </div>
+                    <br>
+                    <div id="test-image-preview" style="border: solid 1px red;height: 300px;">
+
+                    </div>
+                </div>
+                <div class="checkbox">
+                    <label><input type="checkbox"/>Check me out</label>
+                </div>
+                <span id="butto" class="btn btn-default">Submit</span>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

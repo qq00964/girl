@@ -1,7 +1,7 @@
 # java 的反射
 
 ### 1、class类(详见reflect/ClassDemo.java)
-   一般累的实例获取方法：
+   一般类的实例获取方法：
    
   ``` java
   class Foo(){

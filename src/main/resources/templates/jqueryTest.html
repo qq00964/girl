@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<!--xmlns属性：在文档中定义一个或多个可供选择的命名空间-->
+<!--类似于 URL，浏览器会将此URL用于该属性所在元素内的所有内容。-->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>JqueryTest(js+thymeleaf+bootstrap)</title>
+    <!--通过CDN服务引入bootstrap参考链接：http://v3.bootcss.com/getting-started/#download-->
+    <!--通过本地bootstrap文件引入-->
+    <link rel="stylesheet" th:href="@{/bootstrap-3.3.7-dist/css/bootstrap.min.css}"
+          href="/bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
+    <script type="text/javascript" th:src="@{/js/jquery-3.2.1.min.js}" src="/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" th:src="@{/bootstrap-3.3.7-dist/js/bootstrap.min.js}"
+            src="/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+    <!--th:inline 有三个值：text,JavaScript,none 不能写错，错了页面不能访问-->
+
+    <script type="text/javascript" th:inline="javascript">
+        $(function () {
+            // 找出所有name属性值以icon开头的DOM
+            var icons = $('[name^=icon]'); // 例如: name="icon-1", name="icon-2"
+
+            // 找出所有name属性值以with结尾的DOM
+            var names = $('[name$=with]'); // 例如: name="startswith", name="endswith"
+
+
+//            :input：可以选择<input>，<textarea>，<select>和<button>；
+//
+//            :file：可以选择<input type="file">，和input[type=file]一样；
+//
+//            :checkbox：可以选择复选框，和input[type=checkbox]一样；
+//
+//            :radio：可以选择单选框，和input[type=radio]一样；
+//
+//            :focus：可以选择当前输入焦点的元素，例如把光标放到一个<input>上，用$('input:focus')就可以选出；
+//
+//            :checked：选择当前勾上的单选框和复选框，用这个选择器可以立刻获得用户选择的项目，如$('input[type=radio]:checked')；
+//
+//            :enabled：可以选择可以正常输入的<input>、<select>
+//            等，也就是没有灰掉的输入；
+//
+//            :disabled：和:enabled正好相反，选择那些不能输入的。
+
+            var div = $('#test-slide');
+
+            $("#slide_toggle").click(function () {
+//                show()和hide()是从左上角逐渐展开或收缩的
+                div.slideToggle(1000); // 在1秒钟内逐渐向上消失或向下显示
+            })
+
+            $("#fade_toggle").click(function () {
+//                fadeIn()和fadeOut()的动画效果是淡入淡出
+                div.fadeToggle(1000); // 在1秒钟内逐渐淡入淡出
+            })
+
+            $("#animate").click(function () {
+                div.animate({
+                    opacity: 0.25,
+                    width: '1000px',
+                    height: '400px'
+                }, 1000, function () {
+                    console.log('动画已结束');
+                    // 恢复至初始状态:
+                    $(this).css('opacity', '1.0').css('width', '400px').css('height', '700px');
+                });
+            })
+        })
+    </script>
+</head>
+<body>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                            data-target="#bs-example-navbar-collapse-1"><span
+                            class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
+                            class="icon-bar"></span><span class="icon-bar"></span></button>
+                    <a class="navbar-brand" href="#">Brand</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="#">Link</a>
+                        </li>
+                        <li>
+                            <a href="#">Link</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown<strong
+                                    class="caret"></strong></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#">Action</a>
+                                </li>
+                                <li>
+                                    <a href="#">Another action</a>
+                                </li>
+                                <li>
+                                    <a href="#">Something else here</a>
+                                </li>
+                                <li class="divider">
+                                </li>
+                                <li>
+                                    <a href="#">Separated link</a>
+                                </li>
+                                <li class="divider">
+                                </li>
+                                <li>
+                                    <a href="#">One more separated link</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="navbar-form navbar-left" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control"/>
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#">Link</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown<strong
+                                    class="caret"></strong></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#">Action</a>
+                                </li>
+                                <li>
+                                    <a href="#">Another action</a>
+                                </li>
+                                <li>
+                                    <a href="#">Something else here</a>
+                                </li>
+                                <li class="divider">
+                                </li>
+                                <li>
+                                    <a href="#">Separated link</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+            </nav>
+            <div class="jumbotron">
+                <div>
+                    <button class="btn btn-info" id="slide_hide">slide_hide</button>
+                    <button class="btn btn-info" id="slide_show">slide_show</button>
+                    <button class="btn btn-info" id="slide_toggle">slide_toggle</button>
+                    <br>
+                    <button class="btn btn-info" id="fade_hide">fade_hide</button>
+                    <button class="btn btn-info" id="fade_show">fade_show</button>
+                    <button class="btn btn-info" id="fade_toggle">fade_toggle</button>
+                    <br>
+                    <button class="btn btn-info" id="animate">animate</button>
+                    <div style="background: url('/images/index.jpg') no-repeat 0 0;height: 200px;width: 500px;
+                            border: solid 1px green;"
+                         id="test-slide">
+                    </div>
+                </div>
+                <p>
+                    <a class="btn btn-primary btn-large" href="#">Learn more</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-4 column">
+            <h2>
+                Heading
+            </h2>
+            <p>
+                Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
+                condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis
+                euismod. Donec sed odio dui.
+            </p>
+            <p>
+                <a class="btn" href="#">View details »</a>
+            </p>
+        </div>
+        <div class="col-md-4 column">
+            <h2>
+                Heading
+            </h2>
+            <p>
+                Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
+                condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis
+                euismod. Donec sed odio dui.
+            </p>
+            <p>
+                <a class="btn" href="#">View details »</a>
+            </p>
+        </div>
+        <div class="col-md-4 column">
+            <h2>
+                Heading
+            </h2>
+            <p>
+                Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
+                condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis
+                euismod. Donec sed odio dui.
+            </p>
+            <p>
+                <a class="btn" href="#">View details »</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

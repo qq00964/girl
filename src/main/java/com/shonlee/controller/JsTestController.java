@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Created by ShonLee on 2017/6/28.
  */
 @Controller
+// @RestController 包含controller和response两个功能
+//@RestController
 @RequestMapping("jsTest")
 public class JsTestController {
     public static final Logger logger = LoggerFactory.getLogger(JsTestController.class);
@@ -19,4 +21,25 @@ public class JsTestController {
     public String jspTest() {
         return "/testJs";
     }
+
+    @GetMapping("windows")
+    public String jsWindowsTest() {
+        return "/jsWindowsTest";
+    }
+
+    @GetMapping("bootstrap")
+    public String bootstrapTest() {
+        return "/bootstrap";
+    }
+
+    @GetMapping("jsFile")
+    public String jsFileTest() {
+        return "/jsFileTest";
+    }
+
+    @GetMapping("jquery")
+    public String jqueryTest() {
+        return "/jqueryTest";
+    }
+
 }

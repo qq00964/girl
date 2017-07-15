@@ -24,6 +24,10 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
 
+        <!--使用thymeleaf3.0版本-->
+        <thymeleaf.version>3.0.2.RELEASE</thymeleaf.version>
+        <thymeleaf-layout-dialect.version>2.0.4</thymeleaf-layout-dialect.version>
+
     </properties>
 
     <dependencies>
@@ -58,11 +62,22 @@
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
-        <!--关于thymeleaf模板引擎的支持-->
+        <!--关于thymeleaf模板引擎的支持,默认选择的是2.0版本，需要在properties属性中配置使用3.0版本-->
+        <!--2.0和3.0的区别在于：-->
+        <!--①：3.0可以不需要结束标签，2.0必须使用结束标签或者自己配置如下的nekohtml的依赖-->
+        <!--②：模板类型不一样：HTML,XML,TEXT,JAVASCRIPT,CSS,RAW-->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
+
+        <!--用于模板文件标签不用结尾-->
+        <!--<dependency>-->
+            <!--<groupId>net.sourceforge.nekohtml</groupId>-->
+            <!--<artifactId>nekohtml</artifactId>-->
+            <!--<version>1.9.22</version>-->
+        <!--</dependency>-->
 
         <!--关于使用JavaMailSender发送邮件的支持-->
         <dependency>
@@ -120,13 +135,6 @@
             <groupId>com.shonlee.json</groupId>
             <artifactId>json</artifactId>
             <version>2.4</version>
-        </dependency>
-
-        <!--用于模板文件标签不用结尾-->
-        <dependency>
-            <groupId>net.sourceforge.nekohtml</groupId>
-            <artifactId>nekohtml</artifactId>
-            <version>1.9.22</version>
         </dependency>
 
         <!--&lt;!&ndash;配置jsp jstl的支持&ndash;&gt;-->

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<!--xmlns属性：在文档中定义一个或多个可供选择的命名空间-->
+<!--类似于 URL，浏览器会将此URL用于该属性所在元素内的所有内容。-->
+<html xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>JsWindowsTest(js+thymeleaf+bootstrap)</title>
+    <!--通过CDN服务引入bootstrap参考链接：http://v3.bootcss.com/getting-started/#download-->
+    <!--通过本地bootstrap文件引入-->
+    <link rel="stylesheet" th:href="@{/bootstrap-3.3.7-dist/css/bootstrap.min.css}"
+          href="/bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
+    <script type="text/javascript" th:src="@{/js/jquery-3.2.1.min.js}" src="/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/md5.js}" src="/js/md5.js"></script>
+    <script type="text/javascript" th:src="@{/bootstrap-3.3.7-dist/js/bootstrap.min.js}"
+            src="/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        //关于Windows的基本信息
+        $(function () {
+            $("#btn").click(function () {
+//               window.innerWidth：表示可用的屏幕宽度，screen.width：表示整个电脑屏幕的宽度
+                alert("浏览器窗口可用大小:" + window.innerHeight + "X" + window.innerWidth + "\n"
+                    + "浏览器的名称为：" + navigator.appName + "\n"
+                    + "浏览器版本:" + navigator.appVersion + "\n"
+                    + "浏览器设置的语言:" + navigator.language + "\n"
+                    + "浏览器使用的操作系统类型：" + navigator.platform);
+            })
+        });
+
+        // 对DOM节点的处理
+        $(function () {
+//         document对象就是表示整个html文档（DOM），document.title可以获取title的值
+            //获取id为ul的节点
+            var tagName = document.getElementById("ul");
+            var firstElementChild = tagName.firstElementChild;
+            firstElementChild.style.color = '#ff0000';
+            firstElementChild.style.fontSize = '20px';
+            firstElementChild.style.paddingTop = '5em';
+            //返回该节点的最后一个子节点
+            var lastElementChild = tagName.lastElementChild;
+            alert(lastElementChild.value);
+
+            //添加DOM节点
+            var d = document.createElement("style");
+            d.setAttribute("type", "text/css");
+            d.innerHTML = 'p{color:#ff0000}';
+            document.getElementsByTagName('head')[0].appendChild(d);
+
+            //在指定的位置添加DOM节点
+            var list = document.getElementById("list");
+            var ref = document.getElementById("python");
+            var haskell = document.createElement("p");
+            haskell.id = "haskell";
+            haskell.innerText = "haskell";
+            //list.appendChild(haskell); 插入一个子节点
+            //insertBefore 将haskell节点插入到ref的前面
+            list.insertBefore(haskell, ref);
+
+            // 拿到父节点:
+            var parent = ref.parentElement;
+            // 删除:
+            // var removed = parent.removeChild(ref);
+        });
+
+        //对密码进行MD5加密
+        $(function () {
+            $("#butto").click(function () {
+                var inputPassword = document.getElementById("exampleInputPassword1");
+                var MD5InputPassword = document.getElementById("MD5InputPassword");
+                // 把用户输入的明文变为MD5:
+                var MD5value = MD5InputPassword.value;
+                MD5value = hex_md5(inputPassword.value);
+                alert("MD5value=" + MD5value);
+                // 继续下一步:
+                // $("form").submit();
+            })
+        })
+
+
+    </script>
+</head>
+<body>
+<button id="btn" class="btn btn-info">点击获取浏览器窗口可用大小</button>
+<hr/>
+<ul class="list-group" id="ul">
+    <li class="list-group-item">免费域名注册</li>
+    <li class="list-group-item">免费 Window 空间托管</li>
+</ul>
+<hr/>
+<p>Hello World</p>
+<hr/>
+<!-- HTML结构 -->
+<div id="list">
+    <p id="java">Java</p>
+    <p id="python">Python</p>
+    <p id="scheme">Scheme</p>
+</div>
+<hr/>
+<h3>H5在input中添加了type属性值，如date、datetime、datetime-local、color</h3>
+<input type="color">
+<hr>
+<h2 align="center">用户注册测试（bootstrap）</h2>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <form role="form" enctype="multipart/form-data" method="post">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label><input type="email" class="form-control"
+                                                                                id="exampleInputEmail1"/>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1"/>
+                    <label for="MD5InputPassword" class="col-sm-2 control-label"></label>
+                    <div class="col-sm-10">
+                        <input type="hidden" class="form-control" id="MD5InputPassword"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputFile">File input</label>
+                    <input type="file" id="exampleInputFile"/>
+                    <p class="help-block">
+                        Example block-level help text here.
+                    </p>
+                </div>
+                <div class="checkbox">
+                    <label><input type="checkbox"/>Check me out</label>
+                </div>
+                <button id="butto" class="btn btn-default">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
