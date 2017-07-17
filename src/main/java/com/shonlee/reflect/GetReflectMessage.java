@@ -47,7 +47,7 @@ public class GetReflectMessage {
     public static void getVariablesMessage(Object object) {
         Class c = object.getClass();
         //c.getFields();
-        //获取类中自己申明的方法,不包括从父类继承而来的方法且不考虑访问权限
+        //获取类中自己申明的属性,不包括从父类继承而来的属性且不考虑访问权限
         Field[] declaredFields = c.getDeclaredFields();
         for (Field declaredField : declaredFields) {
             //获取成员变量的类型的类类型
