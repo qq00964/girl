@@ -1,4 +1,4 @@
-    为了构造一个冲突的环境用于书写这篇博客，本人采用这种方式：先在IDEA中新建README.md文件，把一个文件上传（push）到github上面，然后在github这个网站上手动修改这个文件中的内容，这样，当在本地pull下README.md文件的时候就会提示代码冲突了。
+### 为了构造一个冲突的环境用于书写这篇博客，本人采用这种方式：先在IDEA中新建README.md文件，把一个文件上传（push）到github上面，然后在github这个网站上手动修改这个文件中的内容，这样，当在本地pull下README.md文件的时候就会提示代码冲突了。
 
 1、本地文件修改如下图：
     ![](http://img.blog.csdn.net/20160822160436245?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
